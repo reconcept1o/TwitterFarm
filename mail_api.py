@@ -11,8 +11,10 @@ def mail_ve_token_uret():
 
         requests.post("https://api.mail.tm/accounts", json={"address": email, "password": password})
         token = requests.post("https://api.mail.tm/token", json={"address": email, "password": password}).json()["token"]
+        print(f"Mail üretildi: {email}")
         return email, password, token
-    except:
+    except Exception as e:
+        print("Mail üretilemedi:", e)
         return None, None, None
 
 def x_kodu_oku(token):
@@ -24,7 +26,9 @@ def x_kodu_oku(token):
                 if "verify" in msg["subject"].lower():
                     text = msg.get("text", "")
                     code = ''.join(filter(str.isdigit, text))[:6]
+                    print(f"X Doğrulama Kodu: {code}")
                     return code
         except: pass
         time.sleep(10)
+    print("X kodu gelmedi.")
     return None
