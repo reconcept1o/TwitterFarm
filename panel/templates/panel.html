@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Twitter Çiftlik</title>
+    <style>
+        body { font-family: Arial; margin: 40px; background: #f4f4f4; }
+        table { width: 100%; border-collapse: collapse; background: white; }
+        th, td { border: 1px solid #ddd; padding: 12px; }
+        th { background: #007bff; color: white; }
+    </style>
+</head>
+<body>
+    <h1>Twitter Çiftlik Paneli</h1>
+    <p><strong>Toplam Hesap:</strong> {{ accounts|length }}</p>
+    {% if accounts %}
+    <table>
+        <tr><th>Email</th><th>Şifre</th><th>Telefon</th></tr>
+        {% for acc in accounts %}
+        <tr><td>{{ acc.email }}</td><td>{{ acc.password }}</td><td>{{ acc.phone }}</td></tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p>Henüz hesap yok. Botu lokal çalıştır!</p>
+    {% endif %}
+</body>
+</html>
